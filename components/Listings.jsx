@@ -31,12 +31,12 @@ export default function Listings() {
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
         <Reveal className="mb-14 flex flex-col gap-6 border-b border-ink/15 pb-10 md:flex-row md:items-end md:justify-between">
           <div><p className="text-[10px] uppercase tracking-widest2 text-gold-dim">
-            Recent Representation
+            Brian K. Noland Representations
           </p>
           <h2 className="mt-4 font-serif text-4xl text-ink lg:text-6xl">
-            Local opportunity, <em className="text-gold-dim">clearly understood.</em>
+            Brian's local work, <em className="text-gold-dim">clearly represented.</em>
           </h2></div>
-          <a href="#contact" className="text-[10px] uppercase tracking-[0.22em] text-ink underline decoration-gold underline-offset-8">View all properties &nbsp;↗</a>
+          <a href="https://www.naibeverly-hanks.com/agents/bknoland" target="_blank" rel="noreferrer" className="text-[10px] uppercase tracking-[0.22em] text-ink underline decoration-gold underline-offset-8">View Brian's profile &nbsp;↗</a>
         </Reveal>
 
         <div className="grid gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
