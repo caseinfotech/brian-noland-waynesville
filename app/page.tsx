@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Listings from "@/components/Listings";
+import PropertySearch from "@/components/PropertySearch";
 import About from "@/components/About";
 import Stats from "@/components/Stats";
 import Process from "@/components/Process";
@@ -14,6 +15,7 @@ export default function Home() {
       <Nav />
       <Hero />
       <Listings />
+      <PropertySearch />
       <About />
       <Stats />
       <Process />
