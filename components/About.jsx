@@ -10,10 +10,10 @@ export default function About() {
             <div className="absolute -bottom-5 -right-5 h-2/3 w-2/3 border border-gold/40" />
             <div className="relative aspect-[16/10] overflow-hidden bg-white">
               <Image
-                src="/images/brian-noland.jpg"
+                src="/images/brian-noland-award-2026.jpeg"
                 alt="Brian K. Noland, residential and commercial broker"
                 fill
-                className="object-cover object-right"
+                className="object-cover object-center"
               />
             </div>
           </div>
