@@ -36,14 +36,14 @@ export default function Nav({ solid = false }) {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-luxe ${
         light
-          ? "bg-bone/95 backdrop-blur-md border-b border-ink/10 py-4"
-          : "bg-transparent py-7"
+          ? "bg-bone/95 backdrop-blur-md border-b border-ink/10 py-5"
+          : "bg-transparent py-8"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
-        <Link href="/" className="group flex items-center gap-4">
+        <Link href="/" className="group flex items-center gap-5">
           <div>
-            <span className={`font-serif text-2xl tracking-wide ${light ? "text-ink" : "text-bone"}`}>
+            <span className={`font-serif text-3xl tracking-wide lg:text-4xl ${light ? "text-ink" : "text-bone"}`}>
               Brian K. Noland<span className="text-gold">.</span>
             </span>
             <span className={`mt-0.5 block text-[9px] uppercase tracking-widest2 ${light ? "text-gold-dim" : "text-gold-light"}`}>
@@ -51,11 +51,13 @@ export default function Nav({ solid = false }) {
             </span>
           </div>
 
-          {/* Firm identification — required on licensee advertising in NC. */}
-          <span className={`hidden h-8 w-px sm:block ${light ? "bg-ink/15" : "bg-bone/25"}`} aria-hidden="true" />
+          {/* Firm identification — required on licensee advertising in NC.
+              Sized to match Brian's name in visual weight, not tucked in as
+              an afterthought. */}
+          <span className={`hidden h-11 w-px sm:block lg:h-14 ${light ? "bg-ink/15" : "bg-bone/25"}`} aria-hidden="true" />
           <BrokerageMark
             dark={light}
-            className="hidden w-[62px] sm:block lg:w-[80px]"
+            className="hidden w-[92px] sm:block lg:w-[124px]"
           />
         </Link>
 

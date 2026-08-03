@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto max-w-[1440px] px-6 py-14 lg:px-12">
         <div className="flex flex-col items-center gap-10 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:text-left">
           <div>
-            <p className="font-serif text-2xl text-bone lg:text-3xl">
+            <p className="font-serif text-3xl text-bone lg:text-4xl">
               Brian K. Noland<span className="text-gold">.</span>
             </p>
             {/* Was "Asheville · Blue Ridge · Western NC", which didn't match
@@ -31,8 +31,9 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Firm identification — required on licensee advertising in NC. */}
-          <BrokerageMark />
+          {/* Firm identification — required on licensee advertising in NC.
+              Sized to match Brian's name in visual weight. */}
+          <BrokerageMark className="w-[220px] lg:w-[260px]" />
         </div>
 
         <div className="mt-12 border-t border-bone/10 pt-8">
