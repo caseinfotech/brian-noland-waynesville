@@ -31,7 +31,7 @@ export default function Listings() {
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
         <Reveal className="mb-10 flex flex-col gap-6 border-b border-ink/15 pb-8 md:flex-row md:items-end md:justify-between">
           <div><p className="text-[10px] uppercase tracking-widest2 text-gold-dim">
-            Brian K. Noland Representations
+            Brian Noland Representations
           </p>
           <h2 className="mt-4 max-w-2xl font-serif text-4xl leading-[1.1] text-ink lg:text-5xl">
             Brian&apos;s local work, <em className="text-gold-dim">clearly represented.</em>

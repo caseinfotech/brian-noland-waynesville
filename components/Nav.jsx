@@ -44,7 +44,7 @@ export default function Nav({ solid = false }) {
         <Link href="/" className="group flex items-center gap-3 sm:gap-5">
           <div>
             <span className={`font-serif text-xl tracking-wide sm:text-3xl lg:text-4xl ${light ? "text-ink" : "text-bone"}`}>
-              Brian K. Noland<span className="text-gold">.</span>
+              Brian Noland<span className="text-gold">.</span>
             </span>
             {/* Hidden below sm: on a phone this line plus the logo crowded
                 the header. The location already lives in the hero and footer. */}

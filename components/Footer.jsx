@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-10 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:text-left">
           <div>
             <p className="font-serif text-2xl text-bone sm:text-3xl lg:text-4xl">
-              Brian K. Noland<span className="text-gold">.</span>
+              Brian Noland<span className="text-gold">.</span>
             </p>
             {/* Was "Asheville · Blue Ridge · Western NC", which didn't match
                 the rest of the site's Waynesville / Haywood County positioning. */}
@@ -43,7 +43,7 @@ export default function Footer() {
                 Beverly-Hanks, while the supplied logo is Howard Hanna Real
                 Estate Services. NC requires the affiliated firm to be named
                 correctly on licensee advertising. */}
-            &copy; {new Date().getFullYear()} Brian K. Noland. Residential and
+            &copy; {new Date().getFullYear()} Brian Noland. Residential and
             Commercial Broker Associate, Howard Hanna Real Estate Services.
             Licensed in North Carolina. Equal Housing Opportunity. All
             information deemed reliable but not guaranteed.

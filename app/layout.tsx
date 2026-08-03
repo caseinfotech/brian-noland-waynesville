@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Brian K. Noland | Waynesville Real Estate",
+  title: "Brian Noland | Waynesville Real Estate",
   description:
-    "Brian K. Noland is a residential and commercial broker serving Waynesville, Haywood County, and Western North Carolina.",
+    "Brian Noland is a residential and commercial broker serving Waynesville, Haywood County, and Western North Carolina.",
   openGraph: {
-    title: "Brian K. Noland | Western North Carolina Real Estate",
+    title: "Brian Noland | Western North Carolina Real Estate",
     description:
       "Residential and commercial guidance grounded in eight generations of local knowledge.",
     images: ["/images/blue-ridge-autumn.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Brian K. Noland | Western North Carolina Real Estate",
+    title: "Brian Noland | Western North Carolina Real Estate",
     description:
       "Residential and commercial guidance grounded in eight generations of local knowledge.",
     images: ["/images/blue-ridge-autumn.jpg"],

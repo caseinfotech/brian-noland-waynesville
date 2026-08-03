@@ -13,7 +13,7 @@ export default function About() {
             <div className="relative aspect-[16/10] overflow-hidden bg-white">
               <Image
                 src="/images/brian-noland-award-2026.jpeg"
-                alt="Brian K. Noland, residential and commercial broker"
+                alt="Brian Noland, residential and commercial broker"
                 fill
                 className="object-cover object-center"
               />

@@ -10,10 +10,8 @@ import Image from "next/image";
  * public/images/howard-hanna-mark-v2.png is the monogram + wordmark cropped
  * out of the newer combined "Brian Noland | Howard Hanna" lockup, white on a
  * transparent background. It replaces the previous crop at Jeremy's request.
- * Note: that source lockup renders the name as "Brian Noland" (no middle
- * initial), so it isn't used for the name itself — the name stays live text
- * elsewhere on the site ("Brian K. Noland") so it doesn't drift from every
- * other mention of it.
+ * The name itself stays live text elsewhere on the site rather than baked
+ * into this image, so it's one accessible string instead of a raster of it.
  *
  * The source art is white-only. `dark` renders it over light backgrounds by
  * flattening every opaque pixel to black (alpha untouched) instead of needing

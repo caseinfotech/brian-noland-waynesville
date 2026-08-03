@@ -7,9 +7,9 @@ import PropertySearch from "@/components/PropertySearch";
 import FloatingActions from "@/components/FloatingActions";
 
 export const metadata: Metadata = {
-  title: "Property Search | Brian K. Noland, Waynesville NC",
+  title: "Property Search | Brian Noland, Waynesville NC",
   description:
-    "Search active listings across Waynesville, Haywood County, and Western North Carolina with Brian K. Noland.",
+    "Search active listings across Waynesville, Haywood County, and Western North Carolina with Brian Noland.",
 };
 
 const embedUrl = process.env.NEXT_PUBLIC_IDX_EMBED_URL;
