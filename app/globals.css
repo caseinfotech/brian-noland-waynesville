@@ -1,14 +1,27 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   Palette: "Ink & Sage" — near-black with muted sage, so the photography
+   carries the colour rather than competing with it.
+
+   The `gold-*` names are kept deliberately: they're used across every
+   component, and renaming them would touch dozens of files for no visual
+   gain. Read them as "accent", "accent-light", "accent-dim".
+
+     gold        mid sage    — accents on dark, button hovers
+     gold-light  light sage  — emphasis ON DARK backgrounds
+     gold-dim    deep sage   — small caps / labels ON LIGHT backgrounds
+                               (dark enough to stay legible)
+--------------------------------------------------------------------------- */
 @theme {
-  --color-ink: #12231d;
-  --color-coal: #172a23;
-  --color-smoke: #23372f;
-  --color-bone: #f2efe7;
-  --color-mist: #b8b8ad;
-  --color-gold: #b9784b;
-  --color-gold-light: #d8a77f;
-  --color-gold-dim: #855b3f;
+  --color-ink: #14161a;
+  --color-coal: #1b1e23;
+  --color-smoke: #262a30;
+  --color-bone: #f6f5f2;
+  --color-mist: #a8ada5;
+  --color-gold: #7d8f77;
+  --color-gold-light: #9fb09b;
+  --color-gold-dim: #5f7159;
   --font-serif: "DM Serif Display", Georgia, serif;
   --font-sans: "Manrope", system-ui, sans-serif;
   --tracking-widest2: 0.3em;
@@ -16,11 +29,11 @@
 }
 
 ::selection {
-  background: #b9784b;
-  color: #f2efe7;
+  background: #9fb09b;
+  color: #14161a;
 }
 
-html { background: #12231d; }
+html { background: #14161a; }
 body { overflow-x: hidden; }
 
 .reveal {
@@ -39,7 +52,7 @@ body { overflow-x: hidden; }
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(185, 120, 75, 0.65),
+    rgba(159, 176, 155, 0.7),
     transparent
   );
 }
@@ -63,8 +76,8 @@ body { overflow-x: hidden; }
 }
 
 ::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #12231d; }
+::-webkit-scrollbar-track { background: #14161a; }
 ::-webkit-scrollbar-thumb {
-  background: #b9784b;
+  background: #7d8f77;
   border-radius: 5px;
 }

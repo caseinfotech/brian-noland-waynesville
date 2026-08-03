@@ -30,14 +30,16 @@ export default function Home() {
       {/* Hand-authored past representations. Deliberately NOT from the feed —
           sold data carries different display rules than active IDX listings. */}
       <Listings />
-      {/* Dark band between the light sections — the main route into MLS search. */}
-      <SearchCTA />
       <About />
       <Stats />
       <Process />
       <Testimonials />
       {/* Verified client reviews, quoted from his Realtor.com profile. */}
       <Reviews />
+      {/* Dark band placed between Reviews (bone) and Contact (sand) so it reads
+          as its own block. It previously sat directly above About, which is also
+          bg-ink — two identical dark sections merged into one huge empty void. */}
+      <SearchCTA />
       <Contact />
       <Footer />
     </main>

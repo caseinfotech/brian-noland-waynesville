@@ -17,7 +17,7 @@ const strengths = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="border-y border-gold/10 bg-coal py-24 lg:py-32">
+    <section id="testimonials" className="border-y border-gold/10 bg-coal py-20 lg:py-24">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-10">
         <Reveal>
           <p className="text-center text-[11px] uppercase tracking-widest2 text-gold">

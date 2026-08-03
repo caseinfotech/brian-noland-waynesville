@@ -65,8 +65,8 @@ export default function PropertySearch({ hideHeader = false }) {
   return (
     <section
       id="properties"
-      className={`bg-[#e7e0d4] px-6 lg:px-12 ${
-        hideHeader ? "pb-24 pt-10 lg:pb-32 lg:pt-12" : "py-24 lg:py-32"
+      className={`bg-[#eae9e5] px-6 lg:px-12 ${
+        hideHeader ? "pb-20 pt-8 lg:pb-24 lg:pt-10" : "py-20 lg:py-24"
       }`}
     >
       <div className="mx-auto max-w-[1440px]">

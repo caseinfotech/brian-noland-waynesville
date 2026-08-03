@@ -9,7 +9,7 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section className="border-b border-ink/10 bg-[#e7e0d4]">
+    <section className="border-b border-ink/10 bg-[#eae9e5]">
       <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-y-12 px-6 py-16 lg:grid-cols-4 lg:px-12 lg:py-20">
         {stats.map((s, i) => (
           <Reveal key={s.label} delay={i * 120} className="text-center">

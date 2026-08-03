@@ -155,7 +155,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-[#d9cfbf] px-6 py-24 lg:px-12 lg:py-32">
+    <section id="contact" className="bg-[#dedcd6] px-6 py-20 lg:px-12 lg:py-24">
       <div className="mx-auto grid max-w-[1440px] gap-16 lg:grid-cols-2 lg:gap-24">
         <Reveal>
           <p className="text-[11px] uppercase tracking-widest2 text-gold">

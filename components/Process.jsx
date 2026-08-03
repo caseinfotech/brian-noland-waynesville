@@ -25,7 +25,7 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" className="mx-auto max-w-[1440px] bg-bone px-6 py-24 lg:px-12 lg:py-32">
+    <section id="process" className="mx-auto max-w-[1440px] bg-bone px-6 py-20 lg:px-12 lg:py-24">
       <Reveal className="mb-16">
         <p className="text-[11px] uppercase tracking-widest2 text-gold">
           A Higher Standard of Care
@@ -38,7 +38,7 @@ export default function Process() {
       <div className="grid gap-px bg-ink/15 sm:grid-cols-2 lg:grid-cols-4">
         {steps.map((s, i) => (
           <Reveal key={s.n} delay={i * 120} className="bg-bone">
-            <div className="group h-full p-8 transition-colors duration-500 hover:bg-[#e7e0d4]">
+            <div className="group h-full p-8 transition-colors duration-500 hover:bg-[#eae9e5]">
               <p className="font-serif text-5xl text-gold/40 transition-colors duration-500 group-hover:text-gold">
                 {s.n}
               </p>

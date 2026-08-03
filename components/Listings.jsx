@@ -27,9 +27,9 @@ const listings = [
 
 export default function Listings() {
   return (
-    <section id="listings" className="bg-bone py-24 lg:py-32">
+    <section id="listings" className="bg-bone py-20 lg:py-24">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-        <Reveal className="mb-14 flex flex-col gap-6 border-b border-ink/15 pb-10 md:flex-row md:items-end md:justify-between">
+        <Reveal className="mb-10 flex flex-col gap-6 border-b border-ink/15 pb-8 md:flex-row md:items-end md:justify-between">
           <div><p className="text-[10px] uppercase tracking-widest2 text-gold-dim">
             Brian K. Noland Representations
           </p>

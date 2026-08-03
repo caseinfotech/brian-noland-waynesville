@@ -78,9 +78,9 @@ function Stars({ count = 5 }) {
 
 export default function Reviews() {
   return (
-    <section id="reviews" className="bg-bone py-24 lg:py-32">
+    <section id="reviews" className="bg-bone py-20 lg:py-24">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-        <Reveal className="mb-14 flex flex-col gap-6 border-b border-ink/15 pb-10 md:flex-row md:items-end md:justify-between">
+        <Reveal className="mb-10 flex flex-col gap-6 border-b border-ink/15 pb-8 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="text-[10px] uppercase tracking-widest2 text-gold-dim">
               Verified Client Reviews
@@ -99,12 +99,13 @@ export default function Reviews() {
           </a>
         </Reveal>
 
-        {/* CSS columns rather than a grid: the reviews vary a lot in length,
-            and this avoids tall gaps under the short ones. */}
-        <div className="columns-1 gap-7 md:columns-2 lg:columns-3 [&>*]:mb-7">
+        {/* Grid, not CSS columns: columns flow cards down one column before
+            starting the next, which staggered the card tops and read as broken.
+            A grid keeps every card aligned to the top of its row. */}
+        <div className="grid items-start gap-7 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((r, i) => (
-            <Reveal key={r.name} delay={i * 100} className="break-inside-avoid">
-              <figure className="border border-ink/12 bg-[#f4f1ea] p-7">
+            <Reveal key={r.name} delay={i * 100}>
+              <figure className="flex h-full flex-col border border-ink/12 bg-[#f1f0ec] p-7">
                 <div className="flex items-center justify-between gap-4">
                   <Stars count={r.rating} />
                   <span className="text-[9px] uppercase tracking-[0.18em] text-gold-dim">
@@ -112,7 +113,9 @@ export default function Reviews() {
                   </span>
                 </div>
 
-                <blockquote className="mt-5 font-light leading-7 text-ink/80">
+                {/* flex-1 pushes the attribution to the bottom so the caption
+                    lines up across cards of different lengths. */}
+                <blockquote className="mt-5 flex-1 text-[15px] font-light leading-7 text-ink/80">
                   &ldquo;{r.quote}&rdquo;
                 </blockquote>
 
