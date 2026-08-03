@@ -64,7 +64,7 @@ export default function IdxEmbed({ embedUrl, scriptSrc, widgetId }) {
       <div className="border border-ink/15 bg-bone p-4">
         <div ref={containerRef} id={widgetId || "idx-widget"} />
         {scriptFailed && (
-          <p className="border-l-2 border-gold pl-4 text-sm text-ink/70">
+          <p className="border-l-2 border-gold pl-4 text-sm text-ink/80">
             The property search could not be loaded. Please refresh, or contact
             Brian directly and he&apos;ll send matching listings personally.
           </p>

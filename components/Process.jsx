@@ -27,7 +27,7 @@ export default function Process() {
   return (
     <section id="process" className="mx-auto max-w-[1440px] bg-bone px-6 py-20 lg:px-12 lg:py-24">
       <Reveal className="mb-16">
-        <p className="text-[11px] uppercase tracking-widest2 text-gold">
+        <p className="text-[11px] uppercase tracking-widest2 text-gold-dim">
           A Higher Standard of Care
         </p>
         <h2 className="mt-5 font-serif text-4xl text-ink lg:text-6xl">
@@ -39,11 +39,11 @@ export default function Process() {
         {steps.map((s, i) => (
           <Reveal key={s.n} delay={i * 120} className="bg-bone">
             <div className="group h-full p-8 transition-colors duration-500 hover:bg-[#eae9e5]">
-              <p className="font-serif text-5xl text-gold/40 transition-colors duration-500 group-hover:text-gold">
+              <p className="font-serif text-5xl text-gold/40 transition-colors duration-500 group-hover:text-gold-dim">
                 {s.n}
               </p>
               <h3 className="mt-6 font-serif text-2xl text-ink">{s.title}</h3>
-              <p className="mt-4 text-sm font-light leading-relaxed text-ink/60">
+              <p className="mt-4 text-sm font-light leading-relaxed text-ink/72">
                 {s.body}
               </p>
             </div>

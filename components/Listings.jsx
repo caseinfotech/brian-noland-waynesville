@@ -4,21 +4,21 @@ import Reveal from "./Reveal";
 const listings = [
   {
     title: "Green Valley Road",
-    location: "Waynesville, North Carolina",
+    location: "Waynesville, NC",
     price: "$80,000",
     specs: "Waterfront · Mountain views · Unrestricted",
     image: "/images/green-valley-road.jpg",
   },
   {
     title: "Great Smoky Mountains Expressway",
-    location: "Waynesville, North Carolina",
+    location: "Waynesville, NC",
     price: "$737,500",
     specs: "Office · Heated storage · Three-bay garage",
     image: "/images/great-smoky-mountains-expressway.jpg",
   },
   {
     title: "Riverbend Street",
-    location: "Waynesville, North Carolina",
+    location: "Waynesville, NC",
     price: "$150,000",
     specs: "2 BD · 1 BA · Hazelwood corner lot",
     image: "/images/riverbend-street.jpg",
@@ -33,10 +33,10 @@ export default function Listings() {
           <div><p className="text-[10px] uppercase tracking-widest2 text-gold-dim">
             Brian K. Noland Representations
           </p>
-          <h2 className="mt-4 font-serif text-4xl text-ink lg:text-6xl">
+          <h2 className="mt-4 max-w-2xl font-serif text-4xl leading-[1.1] text-ink lg:text-5xl">
             Brian&apos;s local work, <em className="text-gold-dim">clearly represented.</em>
           </h2></div>
-          <a href="https://www.naibeverly-hanks.com/agents/bknoland" target="_blank" rel="noreferrer" className="text-[10px] uppercase tracking-[0.22em] text-ink underline decoration-gold underline-offset-8">View Brian&apos;s profile &nbsp;↗</a>
+          <a href="https://www.naibeverly-hanks.com/agents/bknoland" target="_blank" rel="noreferrer" className="shrink-0 whitespace-nowrap text-[10px] uppercase tracking-[0.22em] text-ink underline decoration-gold underline-offset-8">View Brian&apos;s profile &nbsp;↗</a>
         </Reveal>
 
         <div className="grid gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
@@ -61,7 +61,7 @@ export default function Listings() {
                     {l.title}
                   </h3></div>
                   <div className="sm:text-right"><p className="font-serif text-xl text-ink">{l.price}</p>
-                    <p className="mt-2 text-[10px] text-ink/55">{l.specs}</p></div>
+                    <p className="mt-2 text-[10px] text-ink/80">{l.specs}</p></div>
                 </div>
               </article>
             </Reveal>

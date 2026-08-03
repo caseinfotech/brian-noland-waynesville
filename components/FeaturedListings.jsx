@@ -106,7 +106,7 @@ export default async function FeaturedListings() {
                       />
                     ) : (
                       <div className="flex h-full items-center justify-center">
-                        <span className="text-[9px] uppercase tracking-[0.2em] text-ink/55">
+                        <span className="text-[9px] uppercase tracking-[0.2em] text-ink/60">
                           Photo coming soon
                         </span>
                       </div>
@@ -138,12 +138,12 @@ export default async function FeaturedListings() {
                       <p className="font-serif text-xl text-ink">
                         {formatPrice(l.price)}
                       </p>
-                      <p className="mt-2 text-[10px] text-ink/55">{specLine(l)}</p>
+                      <p className="mt-2 text-[10px] text-ink/80">{specLine(l)}</p>
                     </div>
                   </div>
 
                   {(l.listOfficeName || l.listAgentName) && (
-                    <p className="mt-3 text-[9px] leading-5 text-ink/60">
+                    <p className="mt-3 text-[9px] leading-5 text-ink/72">
                       Listing courtesy of {l.listOfficeName || l.listAgentName}
                     </p>
                   )}
@@ -154,7 +154,7 @@ export default async function FeaturedListings() {
         </div>
 
         {/* IDX attribution — required wherever MLS data is displayed. */}
-        <p className="mt-12 max-w-3xl text-[10px] leading-5 text-ink/60">
+        <p className="mt-12 max-w-3xl text-[10px] leading-5 text-ink/72">
           Listing data provided by the MLS via MLS Grid. Information is deemed
           reliable but not guaranteed and should be independently verified. IDX
           information is provided exclusively for consumers&apos; personal,

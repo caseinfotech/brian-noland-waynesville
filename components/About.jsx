@@ -4,7 +4,9 @@ import Reveal from "./Reveal";
 export default function About() {
   return (
     <section id="about" className="bg-ink px-6 py-20 text-bone lg:px-12 lg:py-24">
-      <div className="mx-auto grid max-w-[1440px] items-center gap-16 lg:grid-cols-[1.15fr_.85fr] lg:gap-24">
+      {/* Was [1.15fr_.85fr]: the text column got so narrow that the headline
+          broke to one word per line. Even columns, capped overall width. */}
+      <div className="mx-auto grid max-w-[1280px] items-center gap-14 lg:grid-cols-2 lg:gap-20">
         <Reveal>
           <div className="relative">
             <div className="absolute -bottom-5 -right-5 h-2/3 w-2/3 border border-gold/40" />
@@ -24,7 +26,7 @@ export default function About() {
             <p className="text-[11px] uppercase tracking-widest2 text-gold">
               Rooted Here
             </p>
-            <h2 className="mt-5 font-serif text-4xl leading-tight text-bone lg:text-5xl">
+            <h2 className="mt-5 font-serif text-[2.1rem] leading-[1.12] text-bone lg:text-[2.75rem]">
               Eight generations here.
               <br />
               <em className="text-gold-light">Experience that shows.</em>

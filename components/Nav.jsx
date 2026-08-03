@@ -54,7 +54,7 @@ export default function Nav({ solid = false }) {
             <li key={l.href}>
               <Link
                 href={l.href}
-                className={`text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 hover:text-gold ${light ? "text-ink/70" : "text-bone/80"}`}
+                className={`text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 hover:text-gold ${light ? "text-ink/80" : "text-bone/80"}`}
               >
                 {l.label}
               </Link>

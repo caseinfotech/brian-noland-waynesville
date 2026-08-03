@@ -58,14 +58,16 @@ export default function FloatingActions({ showSearch = true }) {
       }`}
       aria-hidden={!visible}
     >
-      <div className="flex items-stretch border-t border-bone/15 bg-ink shadow-[0_-8px_30px_rgba(0,0,0,.18)] sm:border sm:border-bone/15 sm:shadow-[0_10px_40px_rgba(0,0,0,.28)]">
+      {/* Slightly translucent with a blur: this floats over real content, and
+          fully opaque it hides listing prices and stats behind it. */}
+      <div className="flex items-stretch border-t border-bone/15 bg-ink/92 backdrop-blur-md shadow-[0_-8px_30px_rgba(0,0,0,.18)] sm:border sm:border-bone/20 sm:shadow-[0_10px_40px_rgba(0,0,0,.3)]">
         {showSearch && (
           <Link
             href="/search"
             tabIndex={visible ? 0 : -1}
-            className="group flex flex-1 items-center justify-center gap-3 px-6 py-4 text-[10px] uppercase tracking-[0.2em] text-bone transition-colors duration-300 hover:bg-gold hover:text-ink sm:flex-none sm:px-7 sm:py-4"
+            className="group flex flex-1 items-center justify-center gap-2.5 px-5 py-3.5 text-[9px] uppercase tracking-[0.18em] text-bone transition-colors duration-300 hover:bg-gold hover:text-ink sm:flex-none sm:px-6 sm:py-3"
           >
-            <svg viewBox="0 0 20 20" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="1.6" aria-hidden="true">
+            <svg viewBox="0 0 20 20" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.6" aria-hidden="true">
               <circle cx="8.5" cy="8.5" r="5.5" />
               <path d="M12.8 12.8L17 17" strokeLinecap="round" />
             </svg>
@@ -78,9 +80,9 @@ export default function FloatingActions({ showSearch = true }) {
         <Link
           href="/#contact"
           tabIndex={visible ? 0 : -1}
-          className="group flex flex-1 items-center justify-center gap-3 px-6 py-4 text-[10px] uppercase tracking-[0.2em] text-bone transition-colors duration-300 hover:bg-gold hover:text-ink sm:flex-none sm:px-7 sm:py-4"
+          className="group flex flex-1 items-center justify-center gap-2.5 px-5 py-3.5 text-[9px] uppercase tracking-[0.18em] text-bone transition-colors duration-300 hover:bg-gold hover:text-ink sm:flex-none sm:px-6 sm:py-3"
         >
-          <svg viewBox="0 0 20 20" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="1.6" aria-hidden="true">
+          <svg viewBox="0 0 20 20" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.6" aria-hidden="true">
             <rect x="2.5" y="4.5" width="15" height="11" rx="1" />
             <path d="M3 5.5l7 5 7-5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

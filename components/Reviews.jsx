@@ -103,7 +103,7 @@ export default function Reviews() {
           >
             Read all reviews on Realtor.com &nbsp;↗
           </a>
-          <p className="mx-auto mt-6 max-w-xl text-[10px] leading-5 text-ink/55">
+          <p className="mx-auto mt-6 max-w-xl text-[10px] leading-5 text-ink/80">
             Verified client reviews from Brian&apos;s Realtor.com profile,
             sourced by RealSatisfied. Shortened for display; an ellipsis
             (&hellip;) indicates omitted text.
