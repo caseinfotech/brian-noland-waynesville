@@ -1,7 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Listings from "@/components/Listings";
-import PropertySearch from "@/components/PropertySearch";
 import About from "@/components/About";
 import Stats from "@/components/Stats";
 import Process from "@/components/Process";
@@ -14,8 +13,9 @@ export default function Home() {
     <main>
       <Nav />
       <Hero />
+      {/* Brian's own representations. Full-market search lives at /search so
+          the homepage stays on-brand rather than hosting a vendor iframe. */}
       <Listings />
-      <PropertySearch />
       <About />
       <Stats />
       <Process />

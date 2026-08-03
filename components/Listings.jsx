@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "./Reveal";
 
 const listings = [
@@ -34,9 +35,9 @@ export default function Listings() {
             Brian K. Noland Representations
           </p>
           <h2 className="mt-4 font-serif text-4xl text-ink lg:text-6xl">
-            Brian's local work, <em className="text-gold-dim">clearly represented.</em>
+            Brian&apos;s local work, <em className="text-gold-dim">clearly represented.</em>
           </h2></div>
-          <a href="https://www.naibeverly-hanks.com/agents/bknoland" target="_blank" rel="noreferrer" className="text-[10px] uppercase tracking-[0.22em] text-ink underline decoration-gold underline-offset-8">View Brian's profile &nbsp;↗</a>
+          <a href="https://www.naibeverly-hanks.com/agents/bknoland" target="_blank" rel="noreferrer" className="text-[10px] uppercase tracking-[0.22em] text-ink underline decoration-gold underline-offset-8">View Brian&apos;s profile &nbsp;↗</a>
         </Reveal>
 
         <div className="grid gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
@@ -68,6 +69,19 @@ export default function Listings() {
           ))}
         </div>
 
+        {/* Route to the full-market search, which lives on its own page. */}
+        <Reveal delay={200} className="mt-16 flex flex-col gap-6 border-t border-ink/15 pt-10 md:flex-row md:items-center md:justify-between">
+          <p className="max-w-xl text-sm leading-7 text-ink/65">
+            Looking for what&apos;s on the market right now? Search every active
+            listing across Haywood County and Western North Carolina.
+          </p>
+          <Link
+            href="/search"
+            className="shrink-0 bg-ink px-7 py-4 text-[10px] uppercase tracking-[0.2em] text-bone transition-colors hover:bg-gold"
+          >
+            Search all listings &nbsp;↗
+          </Link>
+        </Reveal>
       </div>
     </section>
   );
