@@ -5,8 +5,8 @@ export default function Hero() {
     <section id="top" className="relative flex h-[96svh] min-h-[680px] items-end overflow-hidden">
       <div className="absolute inset-0 hero-zoom">
         <Image
-          src="/images/belmont-drive.jpg"
-          alt="Long-range mountain views over Haywood County near Waynesville"
+          src="/images/blue-ridge-autumn.jpg"
+          alt="Autumn light over the Blue Ridge ridgelines of Haywood County, near Waynesville"
           fill
           priority
           className="object-cover"

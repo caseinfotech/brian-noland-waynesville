@@ -9,14 +9,14 @@ export const metadata: Metadata = {
     title: "Brian K. Noland | Western North Carolina Real Estate",
     description:
       "Residential and commercial guidance grounded in eight generations of local knowledge.",
-    images: ["/images/belmont-drive.jpg"],
+    images: ["/images/blue-ridge-autumn.jpg"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Brian K. Noland | Western North Carolina Real Estate",
     description:
       "Residential and commercial guidance grounded in eight generations of local knowledge.",
-    images: ["/images/belmont-drive.jpg"],
+    images: ["/images/blue-ridge-autumn.jpg"],
   },
 };
 
