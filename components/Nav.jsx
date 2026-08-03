@@ -5,7 +5,7 @@ import Link from "next/link";
 
 // Root-relative so these work from /search as well as the homepage.
 const links = [
-  { href: "/#listings", label: "Properties" },
+  { href: "/#featured", label: "Listings" },
   { href: "/search", label: "Search" },
   { href: "/#about", label: "About Brian" },
   { href: "/#process", label: "The Approach" },

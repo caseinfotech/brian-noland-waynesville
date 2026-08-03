@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -28,11 +29,17 @@ export default function Hero() {
             Residential and commercial guidance grounded in eight generations of local knowledge.
           </p>
           <div className="flex flex-wrap items-center gap-4">
-          <a
-            href="#listings"
+          <Link
+            href="/search"
             className="bg-bone px-7 py-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink transition-all duration-300 hover:bg-gold-light"
           >
-            Explore Properties
+            Search Listings
+          </Link>
+          <a
+            href="#featured"
+            className="border border-bone/40 px-7 py-4 text-[10px] uppercase tracking-[0.2em] text-bone transition-colors duration-300 hover:border-gold-light hover:text-gold-light"
+          >
+            Brian&rsquo;s Properties
           </a>
           <a
             href="#contact"
