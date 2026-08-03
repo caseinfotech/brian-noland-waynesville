@@ -36,6 +36,12 @@
 html { background: #14161a; }
 body { overflow-x: hidden; }
 
+/* Content must never be permanently hidden by a progressive enhancement.
+   Without JS there is no observer to add .is-visible, so show everything. */
+@media (scripting: none) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(28px);

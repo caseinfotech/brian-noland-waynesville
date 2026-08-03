@@ -22,18 +22,29 @@ export default function FloatingActions({ showSearch = true }) {
   const contactVisible = useRef(false);
 
   useEffect(() => {
-    // Hide while the contact section is in view.
-    const contact = document.getElementById("contact");
+    // Hide while the contact section or footer is in view — on mobile this is
+    // a full-width bar, and it would otherwise sit on top of the form the
+    // visitor is filling in, or cover the footer's contact details.
+    const targets = [
+      document.getElementById("contact"),
+      document.querySelector("footer"),
+    ].filter(Boolean);
+
+    const hits = new Set();
     let observer;
-    if (contact) {
+    if (targets.length) {
       observer = new IntersectionObserver(
         (entries) => {
-          contactVisible.current = entries[0]?.isIntersecting ?? false;
+          for (const e of entries) {
+            if (e.isIntersecting) hits.add(e.target);
+            else hits.delete(e.target);
+          }
+          contactVisible.current = hits.size > 0;
           if (contactVisible.current) setVisible(false);
         },
-        { threshold: 0.15 },
+        { threshold: 0.12 },
       );
-      observer.observe(contact);
+      targets.forEach((t) => observer.observe(t));
     }
 
     const onScroll = () => {
