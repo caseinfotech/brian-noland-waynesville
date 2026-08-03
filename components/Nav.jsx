@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import BrokerageMark from "./BrokerageMark";
 
 // Root-relative so these work from /search as well as the homepage.
 const links = [
@@ -40,13 +41,22 @@ export default function Nav({ solid = false }) {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
-        <Link href="/" className="group">
-          <span className={`font-serif text-2xl tracking-wide ${light ? "text-ink" : "text-bone"}`}>
-            Brian K. Noland<span className="text-gold">.</span>
-          </span>
-          <span className={`mt-0.5 block text-[9px] uppercase tracking-widest2 ${light ? "text-gold-dim" : "text-gold-light"}`}>
-            Waynesville &middot; Western North Carolina
-          </span>
+        <Link href="/" className="group flex items-center gap-4">
+          <div>
+            <span className={`font-serif text-2xl tracking-wide ${light ? "text-ink" : "text-bone"}`}>
+              Brian K. Noland<span className="text-gold">.</span>
+            </span>
+            <span className={`mt-0.5 block text-[9px] uppercase tracking-widest2 ${light ? "text-gold-dim" : "text-gold-light"}`}>
+              Waynesville &middot; Western North Carolina
+            </span>
+          </div>
+
+          {/* Firm identification — required on licensee advertising in NC. */}
+          <span className={`hidden h-8 w-px sm:block ${light ? "bg-ink/15" : "bg-bone/25"}`} aria-hidden="true" />
+          <BrokerageMark
+            dark={light}
+            className="hidden w-[62px] sm:block lg:w-[80px]"
+          />
         </Link>
 
         <ul className="hidden items-center gap-10 md:flex">
