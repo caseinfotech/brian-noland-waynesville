@@ -21,12 +21,21 @@ export default function Contact() {
   const startedAt = useRef(0);
 
   // --- Cloudflare Turnstile -------------------------------------------------
-  // Rendered explicitly so we can hold the token in state and reset it after
-  // a submit (tokens are single-use).
+  // Rendered explicitly so we can hold the token in state and reset it after a
+  // submit (tokens are single-use).
+  //
+  // IMPORTANT: this section is wrapped in <Reveal>, which starts at opacity 0
+  // until scrolled into view. Turnstile will not initialise inside an invisible
+  // container — it creates the hidden input, never loads its iframe, and the
+  // user sees "unable to connect". So we wait for the widget to actually be on
+  // screen before rendering. This also avoids loading Turnstile at all for
+  // visitors who never reach the form.
   useEffect(() => {
     if (!SITE_KEY) return;
 
     let cancelled = false;
+    const el = widgetRef.current;
+    if (!el) return;
 
     function render() {
       if (cancelled || !widgetRef.current || !window.turnstile) return;
@@ -41,25 +50,41 @@ export default function Contact() {
       });
     }
 
-    if (window.turnstile) {
-      render();
-    } else {
+    function load() {
+      if (cancelled) return;
+      if (window.turnstile) {
+        render();
+        return;
+      }
       const existing = document.querySelector("script[data-turnstile]");
       if (existing) {
         existing.addEventListener("load", render);
-      } else {
-        const s = document.createElement("script");
-        s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-        s.async = true;
-        s.defer = true;
-        s.dataset.turnstile = "true";
-        s.onload = render;
-        document.head.appendChild(s);
+        return;
       }
+      const s = document.createElement("script");
+      s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      s.async = true;
+      s.defer = true;
+      s.dataset.turnstile = "true";
+      s.onload = render;
+      document.head.appendChild(s);
     }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0]?.isIntersecting) return;
+        observer.disconnect();
+        // One frame of headroom so the reveal transition has started and the
+        // container is genuinely painted before Turnstile measures it.
+        requestAnimationFrame(() => setTimeout(load, 60));
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(el);
 
     return () => {
       cancelled = true;
+      observer.disconnect();
     };
   }, []);
 
