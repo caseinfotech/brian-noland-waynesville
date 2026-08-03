@@ -23,7 +23,7 @@ export default function SearchPage() {
       <Nav solid />
 
       {/* Page header. Padded for the fixed nav. */}
-      <section className="border-b border-ink/15 px-6 pb-16 pt-36 lg:px-12 lg:pb-20 lg:pt-44">
+      <section className="px-6 pb-12 pt-32 lg:px-12 lg:pb-14 lg:pt-40">
         <div className="mx-auto max-w-[1440px]">
           <p className="text-[10px] uppercase tracking-widest2 text-gold-dim">
             Waynesville &middot; Haywood County &middot; Western North Carolina
@@ -32,7 +32,7 @@ export default function SearchPage() {
             Search every active listing,{" "}
             <em className="text-gold-dim">then call someone who knows them.</em>
           </h1>
-          <p className="mt-6 max-w-2xl text-sm leading-7 text-ink/65">
+          <p className="mt-6 max-w-2xl text-sm leading-7 text-ink/70">
             The search below covers the full regional MLS. Brian can show you any
             property on it &mdash; and tell you what the listing sheet
             won&apos;t.
@@ -51,7 +51,9 @@ export default function SearchPage() {
           </div>
         </section>
       ) : (
-        <PropertySearch />
+        /* The page header above already introduces the search — suppress the
+           component's own heading so there aren't two competing headlines. */
+        <PropertySearch hideHeader />
       )}
 
       {/* Always-on nudge back to a human. */}

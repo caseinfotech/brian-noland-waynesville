@@ -28,7 +28,12 @@ function specLine(property) {
   );
 }
 
-export default function PropertySearch() {
+/**
+ * @param {{ hideHeader?: boolean }} props
+ *   `hideHeader` when the surrounding page already has its own heading —
+ *   otherwise /search shows two competing search headlines.
+ */
+export default function PropertySearch({ hideHeader = false }) {
   const [propertyType, setPropertyType] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -58,23 +63,30 @@ export default function PropertySearch() {
   }
 
   return (
-    <section id="properties" className="bg-[#e7e0d4] px-6 py-24 lg:px-12 lg:py-32">
+    <section
+      id="properties"
+      className={`bg-[#e7e0d4] px-6 lg:px-12 ${
+        hideHeader ? "pb-24 pt-10 lg:pb-32 lg:pt-12" : "py-24 lg:py-32"
+      }`}
+    >
       <div className="mx-auto max-w-[1440px]">
-        <Reveal className="max-w-3xl">
-          <p className="text-[10px] uppercase tracking-widest2 text-gold-dim">
-            Live property search
-          </p>
-          <h2 className="mt-4 font-serif text-4xl text-ink lg:text-6xl">
-            Search what&apos;s <em className="text-gold-dim">on the market.</em>
-          </h2>
-          <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/65">
-            Browse the authorized live MLS feed. This test connection is limited
-            to API-supported filters; the production search will use a synced
-            local listing database for location, price, and map search.
-          </p>
-        </Reveal>
+        {!hideHeader && (
+          <Reveal className="max-w-3xl">
+            <p className="text-[10px] uppercase tracking-widest2 text-gold-dim">
+              Live property search
+            </p>
+            <h2 className="mt-4 font-serif text-4xl text-ink lg:text-6xl">
+              Search what&apos;s <em className="text-gold-dim">on the market.</em>
+            </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/70">
+              Browse the authorized live MLS feed. This test connection is
+              limited to API-supported filters; the production search will use a
+              synced local listing database for location, price, and map search.
+            </p>
+          </Reveal>
+        )}
 
-        <Reveal delay={125} className="mt-12">
+        <Reveal delay={125} className={hideHeader ? "" : "mt-12"}>
           <form onSubmit={handleSubmit} className="grid gap-4 border-y border-ink/15 py-6 md:grid-cols-[1fr_auto]">
             <label className="sr-only" htmlFor="property-type">Property type</label>
             <select
@@ -128,7 +140,7 @@ export default function PropertySearch() {
                             />
                           ) : (
                             <div className="flex h-full items-center justify-center">
-                              <span className="text-[9px] uppercase tracking-[0.2em] text-ink/40">
+                              <span className="text-[9px] uppercase tracking-[0.2em] text-ink/55">
                                 Photo unavailable
                               </span>
                             </div>
@@ -164,7 +176,7 @@ export default function PropertySearch() {
                         </div>
 
                         {(property.listOfficeName || property.listAgentName) && (
-                          <p className="mt-3 text-[9px] leading-5 text-ink/45">
+                          <p className="mt-3 text-[9px] leading-5 text-ink/60">
                             Listing courtesy of{" "}
                             {property.listOfficeName || property.listAgentName}
                           </p>
@@ -175,7 +187,7 @@ export default function PropertySearch() {
                 </div>
 
                 {/* IDX attribution — required when displaying MLS data. */}
-                <p className="mt-12 max-w-3xl text-[10px] leading-5 text-ink/45">
+                <p className="mt-12 max-w-3xl text-[10px] leading-5 text-ink/60">
                   Listing data provided by the MLS via MLS Grid. Information is
                   deemed reliable but not guaranteed and should be independently
                   verified. IDX information is provided exclusively for

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
 
 const inputClass =
-  "w-full border-b border-ink/25 bg-transparent py-3 text-sm font-light text-ink placeholder:text-ink/45 focus:border-gold focus:outline-none transition-colors";
+  "w-full border-b border-ink/25 bg-transparent py-3 text-sm font-light text-ink placeholder:text-ink/60 focus:border-gold focus:outline-none transition-colors";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 const HOLD_MS = 1200;
@@ -254,7 +254,7 @@ export default function Contact() {
                         : "Press and hold to send"}
                   </span>
                 </button>
-                <p className="mt-3 text-[10px] uppercase tracking-[0.18em] text-ink/45">
+                <p className="mt-3 text-[10px] uppercase tracking-[0.18em] text-ink/60">
                   Hold the button for a moment to confirm you&rsquo;re human
                 </p>
               </div>

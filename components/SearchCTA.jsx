@@ -10,18 +10,20 @@ import Reveal from "./Reveal";
  */
 export default function SearchCTA() {
   return (
-    <section className="bg-ink px-6 py-24 lg:px-12 lg:py-32">
-      <div className="mx-auto max-w-[1440px]">
+    <section className="bg-ink px-6 py-20 lg:px-12 lg:py-24">
+      {/* Narrower than the page max-width on purpose: at 1440px a two-column
+          split leaves a large dead gap in the middle of the band. */}
+      <div className="mx-auto max-w-[1100px]">
         <Reveal className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
+          <div className="max-w-xl">
             <p className="flex items-center gap-4 text-[10px] uppercase tracking-[0.35em] text-gold-light">
               <span className="h-px w-12 bg-gold-light" /> The full market
             </p>
-            <h2 className="mt-7 font-serif text-4xl leading-[1.05] text-bone lg:text-6xl">
+            <h2 className="mt-6 font-serif text-4xl leading-[1.05] text-bone lg:text-5xl">
               Every active listing in{" "}
               <em className="font-normal text-gold-light">Haywood County.</em>
             </h2>
-            <p className="mt-6 max-w-lg text-sm leading-7 text-bone/70">
+            <p className="mt-5 max-w-lg text-sm leading-7 text-bone/75">
               Search the regional MLS directly &mdash; homes, land, and
               commercial. Then bring anything you find to someone who has walked
               the roads it sits on.

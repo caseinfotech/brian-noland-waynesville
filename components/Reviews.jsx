@@ -121,7 +121,7 @@ export default function Reviews() {
                   <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-gold-dim">
                     {r.from}
                   </p>
-                  <p className="mt-2 text-[10px] text-ink/45">
+                  <p className="mt-2 text-[10px] text-ink/60">
                     {r.location} &middot; {r.date}
                   </p>
                 </figcaption>
@@ -131,7 +131,7 @@ export default function Reviews() {
         </div>
 
         <Reveal className="mt-10">
-          <p className="text-[10px] leading-5 text-ink/45">
+          <p className="text-[10px] leading-5 text-ink/60">
             Reviews shown are verified client reviews published on Brian&apos;s
             Realtor.com profile, sourced by RealSatisfied. Quoted verbatim;
             an ellipsis (&hellip;) indicates omitted text.
