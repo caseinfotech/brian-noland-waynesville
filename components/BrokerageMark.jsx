@@ -7,10 +7,13 @@ import Image from "next/image";
  * affiliated with, so this is a compliance element, not decoration. Keep it on
  * the page — in the nav and the footer.
  *
- * public/images/howard-hanna-mark.png is the firm's own monogram + wordmark,
- * white on a transparent background, cropped from their co-branded agent
- * lockup (the other agent's name was cropped out — this file has never
- * contained it). Native size 530x171.
+ * public/images/howard-hanna-mark-v2.png is the monogram + wordmark cropped
+ * out of the newer combined "Brian Noland | Howard Hanna" lockup, white on a
+ * transparent background. It replaces the previous crop at Jeremy's request.
+ * Note: that source lockup renders the name as "Brian Noland" (no middle
+ * initial), so it isn't used for the name itself — the name stays live text
+ * elsewhere on the site ("Brian K. Noland") so it doesn't drift from every
+ * other mention of it.
  *
  * The source art is white-only. `dark` renders it over light backgrounds by
  * flattening every opaque pixel to black (alpha untouched) instead of needing
@@ -22,10 +25,10 @@ import Image from "next/image";
 export default function BrokerageMark({ className = "w-[168px] lg:w-[196px]", dark = false }) {
   return (
     <Image
-      src="/images/howard-hanna-mark.png"
+      src="/images/howard-hanna-mark-v2.png"
       alt="Howard Hanna Real Estate Services"
-      width={530}
-      height={171}
+      width={1357}
+      height={427}
       className={`h-auto object-contain transition-[filter] duration-500 ${dark ? "brightness-0" : ""} ${className}`}
     />
   );
