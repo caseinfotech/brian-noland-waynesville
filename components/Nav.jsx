@@ -41,23 +41,25 @@ export default function Nav({ solid = false }) {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
-        <Link href="/" className="group flex items-center gap-5">
+        <Link href="/" className="group flex items-center gap-3 sm:gap-5">
           <div>
-            <span className={`font-serif text-3xl tracking-wide lg:text-4xl ${light ? "text-ink" : "text-bone"}`}>
+            <span className={`font-serif text-xl tracking-wide sm:text-3xl lg:text-4xl ${light ? "text-ink" : "text-bone"}`}>
               Brian K. Noland<span className="text-gold">.</span>
             </span>
-            <span className={`mt-0.5 block text-[9px] uppercase tracking-widest2 ${light ? "text-gold-dim" : "text-gold-light"}`}>
+            {/* Hidden below sm: on a phone this line plus the logo crowded
+                the header. The location already lives in the hero and footer. */}
+            <span className={`mt-0.5 hidden text-[9px] uppercase tracking-widest2 sm:block ${light ? "text-gold-dim" : "text-gold-light"}`}>
               Waynesville &middot; Western North Carolina
             </span>
           </div>
 
           {/* Firm identification — required on licensee advertising in NC.
-              Sized to match Brian's name in visual weight, not tucked in as
-              an afterthought. */}
-          <span className={`hidden h-11 w-px sm:block lg:h-14 ${light ? "bg-ink/15" : "bg-bone/25"}`} aria-hidden="true" />
+              Sized to match Brian's name in visual weight at every breakpoint,
+              not tucked in as an afterthought (or dropped on mobile). */}
+          <span className={`h-8 w-px sm:h-11 lg:h-14 ${light ? "bg-ink/15" : "bg-bone/25"}`} aria-hidden="true" />
           <BrokerageMark
             dark={light}
-            className="hidden w-[92px] sm:block lg:w-[124px]"
+            className="w-[46px] sm:w-[92px] lg:w-[124px]"
           />
         </Link>
 
