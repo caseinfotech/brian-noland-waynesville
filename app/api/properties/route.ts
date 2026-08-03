@@ -1,7 +1,18 @@
+import {
+  fetchProperties,
+  LISTINGS_CACHE_CONTROL,
+  DEFAULT_ORIGINATING_SYSTEM,
+} from "@/lib/mlsgrid";
+
 export const runtime = "nodejs";
 
-function escapeODataString(value: string) {
-  return value.replace(/'/g, "''");
+function parseListingIds(raw: string | undefined): string[] | null {
+  if (!raw) return null;
+  const ids = raw
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return ids.length ? ids : null;
 }
 
 export async function GET(request: Request) {
@@ -14,40 +25,27 @@ export async function GET(request: Request) {
   }
 
   const requestUrl = new URL(request.url);
-  const propertyType = requestUrl.searchParams.get("propertyType")?.trim();
-  const filters = [
-    "OriginatingSystemName eq 'carolina'",
-    "MlgCanView eq true",
-    "StandardStatus eq 'Active'",
-  ];
+  const propertyType =
+    requestUrl.searchParams.get("propertyType")?.trim() || null;
 
-  if (propertyType) filters.push(`PropertyType eq '${escapeODataString(propertyType)}'`);
-
-  const upstreamUrl = new URL("https://api-demo.mlsgrid.com/v2/Property");
-  upstreamUrl.searchParams.set("$filter", filters.join(" and "));
-  upstreamUrl.searchParams.set("$top", "12");
-  upstreamUrl.searchParams.set(
-    "$select",
-    "ListingKey,ListingId,ListPrice,City,StateOrProvince,StreetNumber,StreetDirPrefix,StreetName,StreetSuffix,BedroomsTotal,BathroomsTotalInteger,LivingArea,PropertyType,PropertySubType,StandardStatus",
-  );
-
-  const upstream = await fetch(upstreamUrl, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Accept-Encoding": "gzip,deflate",
-    },
+  const result = await fetchProperties(accessToken, {
+    propertyType,
+    top: 12,
+    originatingSystemName:
+      process.env.MLS_GRID_ORIGINATING_SYSTEM_NAME || DEFAULT_ORIGINATING_SYSTEM,
+    agentMlsId: process.env.MLS_GRID_AGENT_MLS_ID || null,
+    listingIds: parseListingIds(process.env.MLS_GRID_LISTING_IDS),
   });
 
-  if (!upstream.ok) {
-    return Response.json(
-      { error: "The MLS service could not return listings at this time." },
-      { status: 502 },
-    );
+  if (!result.ok) {
+    return Response.json({ error: result.error }, { status: result.status });
   }
 
-  const payload = (await upstream.json()) as { value?: unknown[] };
   return Response.json(
-    { properties: payload.value ?? [] },
-    { headers: { "Cache-Control": "public, max-age=300" } },
+    {
+      properties: result.properties,
+      filteredByAgent: result.filteredByAgent ?? false,
+    },
+    { headers: { "Cache-Control": LISTINGS_CACHE_CONTROL } },
   );
 }

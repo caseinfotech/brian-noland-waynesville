@@ -1,22 +1,31 @@
 /** Cloudflare Worker entry point for the vinext-starter template. */
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
+import {
+  fetchProperties,
+  isAllowedMediaUrl,
+  LISTINGS_CACHE_CONTROL,
+  MEDIA_CACHE_CONTROL,
+  DEFAULT_ORIGINATING_SYSTEM,
+} from "../lib/mlsgrid";
 
 interface Env {
-  ASSETS: Fetcher;
+  // ASSETS and IMAGES are Cloudflare bindings that only exist in a deployed
+  // Worker. `vite.config.ts` does not declare them for local dev, so they are
+  // optional here and guarded at the call site below.
+  ASSETS?: Fetcher;
   DB: D1Database;
   MLS_GRID_API_TOKEN?: string;
-  IMAGES: {
+  MLS_GRID_ORIGINATING_SYSTEM_NAME?: string;
+  MLS_GRID_AGENT_MLS_ID?: string;
+  MLS_GRID_LISTING_IDS?: string;
+  IMAGES?: {
     input(stream: ReadableStream): {
       transform(options: Record<string, unknown>): {
         output(options: { format: string; quality: number }): Promise<{ response(): Response }>;
       };
     };
   };
-}
-
-function escapeODataString(value: string) {
-  return value.replace(/'/g, "''");
 }
 
 async function serveProperties(request: Request, env: Env): Promise<Response> {
@@ -28,42 +37,87 @@ async function serveProperties(request: Request, env: Env): Promise<Response> {
   }
 
   const requestUrl = new URL(request.url);
-  const propertyType = requestUrl.searchParams.get("propertyType")?.trim();
-  const filters = [
-    "OriginatingSystemName eq 'carolina'",
-    "MlgCanView eq true",
-    "StandardStatus eq 'Active'",
-  ];
+  const propertyType =
+    requestUrl.searchParams.get("propertyType")?.trim() || null;
 
-  if (propertyType) filters.push(`PropertyType eq '${escapeODataString(propertyType)}'`);
+  const listingIds = (env.MLS_GRID_LISTING_IDS || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
 
-  const upstreamUrl = new URL("https://api-demo.mlsgrid.com/v2/Property");
-  upstreamUrl.searchParams.set("$filter", filters.join(" and "));
-  upstreamUrl.searchParams.set("$top", "12");
-  upstreamUrl.searchParams.set(
-    "$select",
-    "ListingKey,ListingId,ListPrice,City,StateOrProvince,StreetNumber,StreetDirPrefix,StreetName,StreetSuffix,BedroomsTotal,BathroomsTotalInteger,LivingArea,PropertyType,PropertySubType,StandardStatus",
+  const result = await fetchProperties(env.MLS_GRID_API_TOKEN, {
+    propertyType,
+    top: 12,
+    originatingSystemName:
+      env.MLS_GRID_ORIGINATING_SYSTEM_NAME || DEFAULT_ORIGINATING_SYSTEM,
+    agentMlsId: env.MLS_GRID_AGENT_MLS_ID || null,
+    listingIds: listingIds.length ? listingIds : null,
+  });
+
+  if (!result.ok) {
+    return Response.json({ error: result.error }, { status: result.status });
+  }
+
+  return Response.json(
+    {
+      properties: result.properties,
+      filteredByAgent: result.filteredByAgent ?? false,
+    },
+    { headers: { "Cache-Control": LISTINGS_CACHE_CONTROL } },
   );
+}
 
-  const upstream = await fetch(upstreamUrl, {
+/**
+ * Media proxy (Worker edition). Uses the Cloudflare edge cache so repeat
+ * views never re-pull bytes from MLS Grid — important for the 4 GB/hour cap.
+ */
+async function serveMedia(
+  request: Request,
+  env: Env,
+  ctx: ExecutionContext,
+): Promise<Response> {
+  const target = new URL(request.url).searchParams.get("url");
+  if (!target || !isAllowedMediaUrl(target)) {
+    return new Response("Invalid media URL", { status: 400 });
+  }
+
+  const cache = (caches as unknown as { default: Cache }).default;
+  const cacheKey = new Request(request.url, { method: "GET" });
+  const cached = await cache.match(cacheKey);
+  if (cached) return cached;
+
+  let upstream: Response;
+  try {
+    upstream = await fetch(target, {
+      headers: env.MLS_GRID_API_TOKEN
+        ? { Authorization: `Bearer ${env.MLS_GRID_API_TOKEN}` }
+        : {},
+    });
+  } catch {
+    return new Response("Upstream image unavailable", { status: 502 });
+  }
+
+  if (!upstream.ok || !upstream.body) {
+    return new Response("Upstream image unavailable", { status: 502 });
+  }
+
+  const contentType = upstream.headers.get("content-type") ?? "image/jpeg";
+  if (!contentType.startsWith("image/")) {
+    return new Response("Not an image", { status: 415 });
+  }
+
+  const response = new Response(upstream.body, {
+    status: 200,
     headers: {
-      Authorization: `Bearer ${env.MLS_GRID_API_TOKEN}`,
-      "Accept-Encoding": "gzip,deflate",
+      "Content-Type": contentType,
+      "Cache-Control": MEDIA_CACHE_CONTROL,
+      "X-Content-Type-Options": "nosniff",
+      "Content-Security-Policy": "default-src 'none'; sandbox",
     },
   });
 
-  if (!upstream.ok) {
-    return Response.json(
-      { error: "The MLS service could not return listings at this time." },
-      { status: 502 },
-    );
-  }
-
-  const payload = (await upstream.json()) as { value?: unknown[] };
-  return Response.json(
-    { properties: payload.value ?? [] },
-    { headers: { "Cache-Control": "public, max-age=300" } },
-  );
+  ctx.waitUntil(cache.put(cacheKey, response.clone()));
+  return response;
 }
 
 interface ExecutionContext {
@@ -85,15 +139,39 @@ const worker = {
       return serveProperties(request, env);
     }
 
+    if (url.pathname === "/api/media") {
+      return serveMedia(request, env, ctx);
+    }
+
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
-      return handleImageOptimization(request, {
-        fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url))),
-        transformImage: async (body, { width, format, quality }) => {
-          const result = await env.IMAGES.input(body).transform(width > 0 ? { width } : {}).output({ format, quality });
-          return result.response();
+      const images = env.IMAGES;
+      const assets = env.ASSETS;
+
+      return handleImageOptimization(
+        request,
+        {
+          // `path` is always root-relative (vinext validates this), so in local
+          // dev — where the ASSETS binding is absent — we can fetch it straight
+          // off the dev server instead of crashing on `undefined.fetch`.
+          fetchAsset: (path) =>
+            assets
+              ? assets.fetch(new Request(new URL(path, request.url)))
+              : fetch(new URL(path, request.url)),
+          // Without the Images binding, vinext falls back to serving the
+          // original file unoptimized — correct behaviour for local dev.
+          transformImage: images
+            ? async (body, { width, format, quality }) => {
+                const result = await images
+                  .input(body)
+                  .transform(width > 0 ? { width } : {})
+                  .output({ format, quality });
+                return result.response();
+              }
+            : undefined,
         },
-      }, allowedWidths);
+        allowedWidths,
+      );
     }
 
     return handler.fetch(request, env, ctx);

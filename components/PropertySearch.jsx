@@ -13,15 +13,19 @@ function formatPrice(value) {
     : "Price on request";
 }
 
-function propertyAddress(property) {
-  return [
-    property.StreetNumber,
-    property.StreetDirPrefix,
-    property.StreetName,
-    property.StreetSuffix,
-  ]
-    .filter(Boolean)
-    .join(" ");
+function specLine(property) {
+  return (
+    [
+      property.beds && `${property.beds} BD`,
+      property.baths && `${property.baths} BA`,
+      property.sqft && `${property.sqft.toLocaleString()} SF`,
+    ]
+      .filter(Boolean)
+      .join(" · ") ||
+    property.propertySubType ||
+    property.propertyType ||
+    "Property details available"
+  );
 }
 
 export default function PropertySearch() {
@@ -41,7 +45,11 @@ export default function PropertySearch() {
       const response = await fetch(`/api/properties?${params.toString()}`);
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Unable to load properties.");
-      setResult({ properties: data.properties || [], message: "" });
+      setResult({
+        properties: data.properties || [],
+        filteredByAgent: Boolean(data.filteredByAgent),
+        message: "",
+      });
     } catch (error) {
       setResult({ properties: [], message: error.message || "Unable to load properties." });
     } finally {
@@ -95,26 +103,85 @@ export default function PropertySearch() {
             {result.message ? (
               <p className="border-l-2 border-gold pl-4 text-sm text-ink/70">{result.message}</p>
             ) : result.properties.length === 0 ? (
-              <p className="text-sm text-ink/70">No active listings matched those filters.</p>
+              <p className="border-l-2 border-gold pl-4 text-sm leading-7 text-ink/70">
+                {result.filteredByAgent
+                  ? "No active listings are currently associated with Brian in the MLS feed. His recent representations are shown above."
+                  : "No active listings matched those filters."}
+              </p>
             ) : (
-              <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-                {result.properties.map((property) => (
-                  <article key={property.ListingKey} className="border-b border-ink/15 pb-6">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-gold-dim">
-                      {property.City || "MLS Grid"}{property.StateOrProvince ? `, ${property.StateOrProvince}` : ""}
-                    </p>
-                    <h3 className="mt-3 font-serif text-3xl text-ink">
-                      {propertyAddress(property) || "Address available upon request"}
-                    </h3>
-                    <p className="mt-5 font-serif text-xl text-ink">{formatPrice(property.ListPrice)}</p>
-                    <p className="mt-2 text-xs leading-6 text-ink/60">
-                      {[property.BedroomsTotal && `${property.BedroomsTotal} BD`, property.BathroomsTotalInteger && `${property.BathroomsTotalInteger} BA`, property.LivingArea && `${property.LivingArea.toLocaleString()} SF`]
-                        .filter(Boolean)
-                        .join(" · ") || property.PropertySubType || property.PropertyType || "Property details available"}
-                    </p>
-                  </article>
-                ))}
-              </div>
+              <>
+                <div className="grid gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+                  {result.properties.map((property) => {
+                    const photo = property.photos?.[0];
+                    return (
+                      <article key={property.listingKey} className="listing-card group min-w-0">
+                        <div className="relative aspect-[4/3] overflow-hidden bg-ink/10">
+                          {photo ? (
+                            // Served from our own /api/media proxy — MLS Grid
+                            // media URLs are never exposed to the browser.
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={photo.src}
+                              alt={photo.alt}
+                              loading="lazy"
+                              className="h-full w-full object-cover transition-transform duration-1000 ease-luxe group-hover:scale-[1.03]"
+                            />
+                          ) : (
+                            <div className="flex h-full items-center justify-center">
+                              <span className="text-[9px] uppercase tracking-[0.2em] text-ink/40">
+                                Photo unavailable
+                              </span>
+                            </div>
+                          )}
+                          {property.photos?.length > 1 && (
+                            <span className="absolute bottom-4 right-4 bg-bone/90 px-2.5 py-1 text-[9px] uppercase tracking-[0.15em] text-ink backdrop-blur-sm">
+                              {property.photos.length} photos
+                            </span>
+                          )}
+                          {property.status && (
+                            <span className="absolute left-5 top-5 bg-bone/90 px-3 py-2 text-[9px] uppercase tracking-[0.2em] text-ink backdrop-blur-sm">
+                              {property.status}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="grid gap-3 border-b border-ink/15 py-6 sm:grid-cols-[1fr_auto]">
+                          <div>
+                            <p className="text-[9px] uppercase tracking-[0.2em] text-gold-dim">
+                              {property.city || "MLS Grid"}
+                              {property.state ? `, ${property.state}` : ""}
+                            </p>
+                            <h3 className="mt-2 font-serif text-2xl text-ink transition-colors group-hover:text-gold-dim lg:text-3xl">
+                              {property.address || "Address available upon request"}
+                            </h3>
+                          </div>
+                          <div className="sm:text-right">
+                            <p className="font-serif text-xl text-ink">
+                              {formatPrice(property.price)}
+                            </p>
+                            <p className="mt-2 text-[10px] text-ink/55">{specLine(property)}</p>
+                          </div>
+                        </div>
+
+                        {(property.listOfficeName || property.listAgentName) && (
+                          <p className="mt-3 text-[9px] leading-5 text-ink/45">
+                            Listing courtesy of{" "}
+                            {property.listOfficeName || property.listAgentName}
+                          </p>
+                        )}
+                      </article>
+                    );
+                  })}
+                </div>
+
+                {/* IDX attribution — required when displaying MLS data. */}
+                <p className="mt-12 max-w-3xl text-[10px] leading-5 text-ink/45">
+                  Listing data provided by the MLS via MLS Grid. Information is
+                  deemed reliable but not guaranteed and should be independently
+                  verified. IDX information is provided exclusively for
+                  consumers&apos; personal, non-commercial use.
+                </p>
+              </>
             )}
           </div>
         )}
