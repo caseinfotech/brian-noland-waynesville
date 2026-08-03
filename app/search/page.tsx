@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import IdxEmbed from "@/components/IdxEmbed";
 import PropertySearch from "@/components/PropertySearch";
+import FloatingActions from "@/components/FloatingActions";
 
 export const metadata: Metadata = {
   title: "Property Search | Brian K. Noland, Waynesville NC",
@@ -78,6 +79,8 @@ export default function SearchPage() {
       </section>
 
       <Footer />
+      {/* Search link omitted — this is the search page. */}
+      <FloatingActions showSearch={false} />
     </main>
   );
 }

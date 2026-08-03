@@ -9,6 +9,7 @@ import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
 import Reviews from "@/components/Reviews";
 import Contact from "@/components/Contact";
+import FloatingActions from "@/components/FloatingActions";
 import Footer from "@/components/Footer";
 
 // Featured listings come from MLS Grid, which allows only 2 req/sec. Rebuild
@@ -42,6 +43,8 @@ export default function Home() {
       <SearchCTA />
       <Contact />
       <Footer />
+      {/* Persistent access to search and contact once past the hero. */}
+      <FloatingActions />
     </main>
   );
 }
