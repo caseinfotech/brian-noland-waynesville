@@ -4,9 +4,9 @@ export default function Footer() {
   return (
     <footer className="border-t border-gold/15 bg-ink">
       <div className="mx-auto max-w-[1440px] px-6 py-14 lg:px-12">
-        <div className="flex flex-col items-center gap-10 text-center lg:flex-row lg:items-start lg:justify-between lg:gap-16 lg:text-left">
+        <div className="flex flex-col items-center gap-10 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:text-left">
           <div>
-            <p className="font-serif text-xl text-bone">
+            <p className="font-serif text-2xl text-bone lg:text-3xl">
               Brian K. Noland<span className="text-gold">.</span>
             </p>
             {/* Was "Asheville · Blue Ridge · Western NC", which didn't match
