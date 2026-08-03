@@ -1,39 +1,41 @@
-import BrokerageMark from "./BrokerageMark";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <footer className="border-t border-gold/15 bg-ink">
       <div className="mx-auto max-w-[1440px] px-6 py-14 lg:px-12">
-        <div className="flex flex-col items-center gap-10 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:text-left">
-          <div>
-            <p className="font-serif text-2xl text-bone sm:text-3xl lg:text-4xl">
-              Brian Noland<span className="text-gold">.</span>
+        <div className="flex flex-col items-center gap-8 text-center lg:items-start lg:text-left">
+          {/* Single combined lockup — same graphic as the nav, so the name
+              and the Howard Hanna mark stay in the same fixed proportion to
+              each other everywhere on the site. Required firm identification
+              lives inside it. */}
+          <Image
+            src="/images/brian-noland-howard-hanna-lockup.png"
+            alt="Brian Noland | Howard Hanna Real Estate Services"
+            width={2660}
+            height={469}
+            className="h-auto w-[280px] object-contain sm:w-[340px] lg:w-[400px]"
+          />
+          {/* Was "Asheville · Blue Ridge · Western NC", which didn't match
+              the rest of the site's Waynesville / Haywood County positioning. */}
+          <p className="text-[10px] uppercase tracking-widest2 text-gold">
+            Waynesville &middot; Haywood County &middot; Western NC
+          </p>
+          <div className="space-y-1.5 text-[11px] font-light text-mist">
+            <p>
+              <a href="tel:+18287345201" className="transition-colors hover:text-bone">
+                (828) 734-5201
+              </a>
             </p>
-            {/* Was "Asheville · Blue Ridge · Western NC", which didn't match
-                the rest of the site's Waynesville / Haywood County positioning. */}
-            <p className="mt-1.5 text-[10px] uppercase tracking-widest2 text-gold">
-              Waynesville &middot; Haywood County &middot; Western NC
+            <p>
+              <a
+                href="mailto:bknoland@beverly-hanks.com"
+                className="transition-colors hover:text-bone"
+              >
+                bknoland@beverly-hanks.com
+              </a>
             </p>
-            <div className="mt-5 space-y-1.5 text-[11px] font-light text-mist">
-              <p>
-                <a href="tel:+18287345201" className="transition-colors hover:text-bone">
-                  (828) 734-5201
-                </a>
-              </p>
-              <p>
-                <a
-                  href="mailto:bknoland@beverly-hanks.com"
-                  className="transition-colors hover:text-bone"
-                >
-                  bknoland@beverly-hanks.com
-                </a>
-              </p>
-            </div>
           </div>
-
-          {/* Firm identification — required on licensee advertising in NC.
-              Sized to match Brian's name in visual weight at every breakpoint. */}
-          <BrokerageMark className="w-[170px] sm:w-[210px] lg:w-[260px]" />
         </div>
 
         <div className="mt-12 border-t border-bone/10 pt-8">

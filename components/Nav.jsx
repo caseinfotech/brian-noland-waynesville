@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import BrokerageMark from "./BrokerageMark";
 
 // Root-relative so these work from /search as well as the homepage.
 const links = [
@@ -41,34 +41,32 @@ export default function Nav({ solid = false }) {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
-        <Link href="/" className="group flex items-center gap-3 sm:gap-5">
-          <div>
-            <span className={`font-serif text-xl tracking-wide sm:text-3xl lg:text-4xl ${light ? "text-ink" : "text-bone"}`}>
-              Brian Noland<span className="text-gold">.</span>
-            </span>
-            {/* Hidden below sm: on a phone this line plus the logo crowded
-                the header. The location already lives in the hero and footer. */}
-            <span className={`mt-0.5 hidden text-[9px] uppercase tracking-widest2 sm:block ${light ? "text-gold-dim" : "text-gold-light"}`}>
-              Waynesville &middot; Western North Carolina
-            </span>
-          </div>
-
-          {/* Firm identification — required on licensee advertising in NC.
-              Sized to match Brian's name in visual weight at every breakpoint,
-              not tucked in as an afterthought (or dropped on mobile). */}
-          <span className={`h-8 w-px sm:h-11 lg:h-14 ${light ? "bg-ink/15" : "bg-bone/25"}`} aria-hidden="true" />
-          <BrokerageMark
-            dark={light}
-            className="w-[46px] sm:w-[92px] lg:w-[124px]"
+        <Link href="/" className="group block">
+          {/* Single combined lockup — Brian's name and the Howard Hanna mark
+              baked into one graphic at a fixed ratio, so they can never drift
+              out of proportion with each other again. `dark` flips the
+              (white-only) art to black once the header goes light. */}
+          <Image
+            src="/images/brian-noland-howard-hanna-lockup.png"
+            alt="Brian Noland | Howard Hanna Real Estate Services"
+            width={2660}
+            height={469}
+            priority
+            className={`h-auto w-[190px] object-contain transition-[filter] duration-500 sm:w-[260px] lg:w-[300px] ${light ? "brightness-0" : ""}`}
           />
+          {/* Hidden below sm: on a phone this line plus the lockup crowded
+              the header. The location already lives in the hero and footer. */}
+          <span className={`mt-1.5 hidden text-[9px] uppercase tracking-widest2 sm:block ${light ? "text-gold-dim" : "text-gold-light"}`}>
+            Waynesville &middot; Western North Carolina
+          </span>
         </Link>
 
-        <ul className="hidden items-center gap-10 md:flex">
+        <ul className="hidden items-center gap-8 xl:flex">
           {links.map((l) => (
             <li key={l.href}>
               <Link
                 href={l.href}
-                className={`text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 hover:text-gold ${light ? "text-ink/80" : "text-bone/80"}`}
+                className={`whitespace-nowrap text-[10px] uppercase tracking-[0.2em] transition-colors duration-300 hover:text-gold ${light ? "text-ink/80" : "text-bone/80"}`}
               >
                 {l.label}
               </Link>
@@ -77,7 +75,7 @@ export default function Nav({ solid = false }) {
           <li>
             <Link
               href="/#contact"
-              className={`border px-5 py-2.5 text-[10px] uppercase tracking-[0.2em] transition-all duration-300 ${light ? "border-ink bg-ink text-bone hover:bg-gold hover:border-gold" : "border-bone/60 text-bone hover:bg-bone hover:text-ink"}`}
+              className={`whitespace-nowrap border px-5 py-2.5 text-[10px] uppercase tracking-[0.2em] transition-all duration-300 ${light ? "border-ink bg-ink text-bone hover:bg-gold hover:border-gold" : "border-bone/60 text-bone hover:bg-bone hover:text-ink"}`}
             >
               Inquire
             </Link>
@@ -86,12 +84,14 @@ export default function Nav({ solid = false }) {
 
         {/* Mobile toggle. Negative margin offsets the padding so the bigger
             tap target (44px, not the ~14px the bare icon gave it) doesn't
-            shift the icon's visual position. */}
+            shift the icon's visual position. Shown up through lg now — the
+            wider lockup graphic needs the room the inline links used to
+            take, so the full link row only appears at xl and up. */}
         <button
           aria-label={open ? "Close menu" : "Menu"}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className="-m-3 flex flex-col gap-1.5 p-3 md:hidden"
+          className="-m-3 flex flex-col gap-1.5 p-3 xl:hidden"
         >
           <span
             className={`h-px w-6 transition-transform ${light ? "bg-ink" : "bg-bone"} ${
@@ -107,7 +107,7 @@ export default function Nav({ solid = false }) {
       </nav>
 
       {open && (
-        <div className="border-t border-ink/10 bg-bone px-6 py-6 md:hidden">
+        <div className="border-t border-ink/10 bg-bone px-6 py-6 xl:hidden">
           <ul className="flex flex-col gap-5">
             {[...links, { href: "/#contact", label: "Inquire" }].map((l) => (
               <li key={l.href}>
