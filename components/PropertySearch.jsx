@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Reveal from "./Reveal";
 
 function formatPrice(value) {
@@ -36,15 +36,18 @@ function specLine(property) {
 export default function PropertySearch({ hideHeader = false }) {
   const [propertyType, setPropertyType] = useState("");
   const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // Starts true (not false): the page auto-loads listings on mount below, so
+  // the very first render is already in a loading state, not an empty one.
+  const [loading, setLoading] = useState(true);
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setLoading(true);
-    setResult(null);
-
+  // No setState call runs before the first `await` here — everything that
+  // touches state happens after the fetch resolves. That keeps the mount
+  // effect below free of synchronous setState-in-effect, while still
+  // supporting the immediate "Searching…" feedback handleSubmit sets up
+  // itself before calling this.
+  const fetchProperties = useCallback(async (type) => {
     const params = new URLSearchParams();
-    if (propertyType) params.set("propertyType", propertyType);
+    if (type) params.set("propertyType", type);
 
     try {
       const response = await fetch(`/api/properties?${params.toString()}`);
@@ -60,6 +63,25 @@ export default function PropertySearch({ hideHeader = false }) {
     } finally {
       setLoading(false);
     }
+  }, []);
+
+  // Load the full active feed as soon as the page opens — a search page that
+  // shows nothing until you press a button reads as broken, not blank by
+  // design. This is a deliberate fetch-on-mount, not a synchronous state
+  // update, so the lint rule's general "you might not need an effect"
+  // concern doesn't apply here.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchProperties("");
+    // fetchProperties is referentially stable (useCallback, empty deps), so
+    // listing it here doesn't cause re-fetches on every render.
+  }, [fetchProperties]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setLoading(true);
+    setResult(null);
+    fetchProperties(propertyType);
   }
 
   return (

@@ -84,11 +84,14 @@ export default function Nav({ solid = false }) {
           </li>
         </ul>
 
-        {/* Mobile toggle */}
+        {/* Mobile toggle. Negative margin offsets the padding so the bigger
+            tap target (44px, not the ~14px the bare icon gave it) doesn't
+            shift the icon's visual position. */}
         <button
-          aria-label="Menu"
+          aria-label={open ? "Close menu" : "Menu"}
+          aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className="flex flex-col gap-1.5 md:hidden"
+          className="-m-3 flex flex-col gap-1.5 p-3 md:hidden"
         >
           <span
             className={`h-px w-6 transition-transform ${light ? "bg-ink" : "bg-bone"} ${

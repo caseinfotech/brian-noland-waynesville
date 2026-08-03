@@ -42,7 +42,10 @@ export default function Listings() {
         <div className="grid gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {listings.map((l, i) => (
             <Reveal key={l.title} delay={i * 150} className="min-w-0">
-              <article className="listing-card group h-full cursor-pointer">
+              {/* Not a link — nothing to click through to for a sold property
+                  — so no cursor-pointer. It previously invited a click that
+                  went nowhere. */}
+              <article className="listing-card group h-full">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={l.image}

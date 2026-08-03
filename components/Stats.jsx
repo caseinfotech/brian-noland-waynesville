@@ -6,7 +6,7 @@ import Reveal from "./Reveal";
 const stats = [
   { value: "8", label: "Generations in Haywood County" },
   { value: "1,000+", label: "Customers Represented" },
-  { value: "2017", label: "With Beverly-Hanks Since" },
+  { value: "2017", label: "With Howard Hanna Since" },
 ];
 
 export default function Stats() {

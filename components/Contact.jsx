@@ -214,33 +214,57 @@ export default function Contact() {
               }}
               className="space-y-8"
             >
+              {/* Visible labels are sr-only by design — the placeholder carries
+                  the visual label — but a real <label> keeps each field
+                  identifiable to screen readers once text is typed in and the
+                  placeholder disappears. */}
               <div className="grid gap-8 sm:grid-cols-2">
-                <input required name="firstName" placeholder="First name" className={inputClass} />
-                <input required name="lastName" placeholder="Last name" className={inputClass} />
+                <div>
+                  <label htmlFor="contact-firstName" className="sr-only">First name</label>
+                  <input required id="contact-firstName" name="firstName" placeholder="First name" className={inputClass} />
+                </div>
+                <div>
+                  <label htmlFor="contact-lastName" className="sr-only">Last name</label>
+                  <input required id="contact-lastName" name="lastName" placeholder="Last name" className={inputClass} />
+                </div>
               </div>
-              <input
-                required
-                type="email"
-                name="email"
-                placeholder="Email address"
-                className={inputClass}
-              />
-              <input type="tel" name="phone" placeholder="Phone (optional)" className={inputClass} />
-              <select required name="interest" defaultValue="" className={`${inputClass} appearance-none`}>
-                <option value="" disabled className="bg-bone">
-                  I&rsquo;m interested in&hellip;
-                </option>
-                <option className="bg-bone">Buying a home</option>
-                <option className="bg-bone">Selling a home</option>
-                <option className="bg-bone">A market valuation</option>
-                <option className="bg-bone">Something else</option>
-              </select>
-              <textarea
-                rows={4}
-                name="message"
-                placeholder="Tell me a little about what you're looking for"
-                className={`${inputClass} resize-none`}
-              />
+              <div>
+                <label htmlFor="contact-email" className="sr-only">Email address</label>
+                <input
+                  required
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  placeholder="Email address"
+                  className={inputClass}
+                />
+              </div>
+              <div>
+                <label htmlFor="contact-phone" className="sr-only">Phone (optional)</label>
+                <input id="contact-phone" type="tel" name="phone" placeholder="Phone (optional)" className={inputClass} />
+              </div>
+              <div>
+                <label htmlFor="contact-interest" className="sr-only">I&rsquo;m interested in</label>
+                <select id="contact-interest" required name="interest" defaultValue="" className={`${inputClass} appearance-none`}>
+                  <option value="" disabled className="bg-bone">
+                    I&rsquo;m interested in&hellip;
+                  </option>
+                  <option className="bg-bone">Buying a home</option>
+                  <option className="bg-bone">Selling a home</option>
+                  <option className="bg-bone">A market valuation</option>
+                  <option className="bg-bone">Something else</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="contact-message" className="sr-only">Message</label>
+                <textarea
+                  id="contact-message"
+                  rows={4}
+                  name="message"
+                  placeholder="Tell me a little about what you're looking for"
+                  className={`${inputClass} resize-none`}
+                />
+              </div>
 
               {/* Honeypot. Hidden from people, irresistible to naive bots. */}
               <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">

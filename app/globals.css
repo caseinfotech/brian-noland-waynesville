@@ -33,7 +33,14 @@
   color: #14161a;
 }
 
-html { background: #14161a; }
+html {
+  background: #14161a;
+  scroll-behavior: smooth;
+  /* The header is fixed and ~110-130px tall depending on scroll state. Without
+     this, every in-page anchor (#about, #process, #reviews, #contact...) lands
+     with its heading tucked behind the nav. */
+  scroll-padding-top: 118px;
+}
 body { overflow-x: hidden; }
 
 /* Content must never be permanently hidden by a progressive enhancement.
@@ -79,6 +86,7 @@ body { overflow-x: hidden; }
     transition-duration: 0.01ms !important;
   }
   .reveal { opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
 }
 
 ::-webkit-scrollbar { width: 10px; }
