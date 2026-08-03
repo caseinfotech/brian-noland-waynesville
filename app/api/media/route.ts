@@ -27,18 +27,20 @@ export async function GET(request: Request) {
     return new Response("Invalid media URL", { status: 400 });
   }
 
-  const accessToken = process.env.MLS_GRID_API_TOKEN;
-
+  // MLS Grid media URLs are PRE-SIGNED (they carry their own token= and
+  // expires= values). Sending an Authorization header alongside that signature
+  // gets the request rejected by the media CDN — so we deliberately send none.
   let upstream: Response;
   try {
-    upstream = await fetch(target, {
-      headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
-    });
+    upstream = await fetch(target);
   } catch {
     return new Response("Upstream image unavailable", { status: 502 });
   }
 
   if (!upstream.ok || !upstream.body) {
+    console.error(
+      `[media] upstream ${upstream.status} for ${new URL(target).hostname}`,
+    );
     return new Response("Upstream image unavailable", { status: 502 });
   }
 

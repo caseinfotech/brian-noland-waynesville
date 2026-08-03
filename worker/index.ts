@@ -86,13 +86,11 @@ async function serveMedia(
   const cached = await cache.match(cacheKey);
   if (cached) return cached;
 
+  // MLS Grid media URLs are pre-signed (token= / expires= are baked in).
+  // Adding an Authorization header causes the media CDN to reject them.
   let upstream: Response;
   try {
-    upstream = await fetch(target, {
-      headers: env.MLS_GRID_API_TOKEN
-        ? { Authorization: `Bearer ${env.MLS_GRID_API_TOKEN}` }
-        : {},
-    });
+    upstream = await fetch(target);
   } catch {
     return new Response("Upstream image unavailable", { status: 502 });
   }

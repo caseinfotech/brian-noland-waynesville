@@ -22,6 +22,9 @@ export const DEFAULT_ORIGINATING_SYSTEM = "carolina";
 /** Hosts we are willing to proxy images from. Keeps /api/media from
  *  becoming an open redirect/proxy for arbitrary URLs. */
 export const ALLOWED_MEDIA_HOSTS = [
+  // Photos are served from media[-demo].mlsgrid.com via pre-signed URLs.
+  "media-demo.mlsgrid.com",
+  "media.mlsgrid.com",
   "api-demo.mlsgrid.com",
   "api.mlsgrid.com",
   "mlsgrid.com",
