@@ -9,7 +9,7 @@ const links = [
   { href: "/search", label: "Search" },
   { href: "/#about", label: "About Brian" },
   { href: "/#process", label: "The Approach" },
-  { href: "/#testimonials", label: "Stories" },
+  { href: "/#reviews", label: "Reviews" },
 ];
 
 /**

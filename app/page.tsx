@@ -7,6 +7,7 @@ import About from "@/components/About";
 import Stats from "@/components/Stats";
 import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
+import Reviews from "@/components/Reviews";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -35,6 +36,8 @@ export default function Home() {
       <Stats />
       <Process />
       <Testimonials />
+      {/* Verified client reviews, quoted from his Realtor.com profile. */}
+      <Reviews />
       <Contact />
       <Footer />
     </main>

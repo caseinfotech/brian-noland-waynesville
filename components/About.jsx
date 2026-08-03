@@ -33,18 +33,24 @@ export default function About() {
           <Reveal delay={150}>
             <div className="hairline mt-8 mb-8 w-24" />
             <p className="font-light leading-relaxed text-mist">
-              Brian Noland&rsquo;s market knowledge comes from eight generations
-              in the Haywood County mountains. His background as a successful
-              entrepreneur helped him become one of the area&rsquo;s top-producing
-              agents, with the perspective to evaluate both homes and business
-              opportunities.
+              Brian Noland&rsquo;s real estate expertise is rooted in eight
+              generations of family history in the Haywood County mountains. As a
+              successful entrepreneur and one of the area&rsquo;s top-producing
+              agents, he brings a unique ability to evaluate residential
+              properties, commercial investments, and business opportunities.
             </p>
             <p className="mt-5 font-light leading-relaxed text-mist">
-              Brian has guided more than 1,000 customers through buying or selling
-              a home and has represented commercial clients including Publix,
-              Taco Bell, Mattress Firm, Bojangles, and Shoney&rsquo;s. That
-              combination gives his clients one trusted advisor across the full
-              range of real estate needs.
+              Throughout his career, Brian has guided more than 1,000 clients
+              through the process of buying or selling a home. His commercial
+              real estate experience includes representing nationally recognized
+              brands such as Publix, Taco Bell, Mattress Firm, Bojangles, and
+              Shoney&rsquo;s.
+            </p>
+            <p className="mt-5 font-light leading-relaxed text-mist">
+              By combining deep local knowledge, proven business experience, and
+              extensive residential and commercial expertise, Brian provides his
+              clients with one trusted advisor for the full range of their real
+              estate needs.
             </p>
           </Reveal>
           <Reveal delay={300}>
