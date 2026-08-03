@@ -27,14 +27,6 @@ export default function Footer() {
                 (828) 734-5201
               </a>
             </p>
-            <p>
-              <a
-                href="mailto:bknoland@beverly-hanks.com"
-                className="transition-colors hover:text-bone"
-              >
-                bknoland@beverly-hanks.com
-              </a>
-            </p>
           </div>
         </div>
 
