@@ -35,24 +35,50 @@ export default function About() {
           <Reveal delay={150}>
             <div className="hairline mt-8 mb-8 w-24" />
             <p className="font-light leading-relaxed text-mist">
-              Brian Noland&rsquo;s real estate expertise is rooted in eight
-              generations of family history in the Haywood County mountains. As a
-              successful entrepreneur and one of the area&rsquo;s top-producing
-              agents, he brings a unique ability to evaluate residential
-              properties, commercial investments, and business opportunities.
+              Brian K. Noland is a dedicated real estate professional with 18
+              years of experience and more than 2,300 successful property
+              closings throughout Western North Carolina. His extensive
+              knowledge spans residential homes, raw land, and commercial real
+              estate, giving clients the confidence of working with an
+              experienced advisor no matter their real estate needs.
             </p>
             <p className="mt-5 font-light leading-relaxed text-mist">
-              Throughout his career, Brian has guided more than 1,000 clients
-              through the process of buying or selling a home. His commercial
-              real estate experience includes representing nationally recognized
-              brands such as Publix, Taco Bell, Mattress Firm, Bojangles, and
-              Shoney&rsquo;s.
+              In addition to his real estate career, Brian has successfully
+              started, owned, and managed more than a dozen thriving businesses
+              throughout Haywood County. His entrepreneurial background has
+              given him valuable expertise in business, marketing, negotiations,
+              and customer service&mdash;skills that directly benefit his real
+              estate clients.
             </p>
             <p className="mt-5 font-light leading-relaxed text-mist">
-              By combining deep local knowledge, proven business experience, and
-              extensive residential and commercial expertise, Brian provides his
-              clients with one trusted advisor for the full range of their real
-              estate needs.
+              Brian believes that every client deserves personalized service.
+              Whether helping buyers find the right property that meets their
+              specific needs or developing strategic marketing plans to maximize
+              exposure for sellers, he takes the time to understand each
+              client&rsquo;s goals and priorities. He approaches every
+              transaction as if it were his own, putting himself in his
+              clients&rsquo; shoes to ensure they receive the guidance,
+              communication, and level of service he would expect for his own
+              family.
+            </p>
+            <p className="mt-5 font-light leading-relaxed text-mist">
+              Known for his local market expertise, strong work ethic, and
+              commitment to integrity, Brian has built a reputation for
+              delivering exceptional results while making the buying and
+              selling process as smooth and stress-free as possible.
+            </p>
+            <p className="mt-5 font-light leading-relaxed text-mist">
+              Outside of real estate, Brian enjoys classic cars, cruising,
+              camping, and spending quality time with his family. He is also an
+              active member of his local church, where his faith and commitment
+              to serving others are reflected in both his personal life and his
+              approach to business.
+            </p>
+            <p className="mt-5 font-light leading-relaxed text-mist">
+              Whether you&rsquo;re buying your first home, selling a property,
+              investing in land, or seeking commercial opportunities, Brian is
+              committed to providing knowledgeable guidance, honest advice, and
+              exceptional service every step of the way.
             </p>
           </Reveal>
           <Reveal delay={300}>
