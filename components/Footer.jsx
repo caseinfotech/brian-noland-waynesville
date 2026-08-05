@@ -28,6 +28,35 @@ export default function Footer() {
               </a>
             </p>
           </div>
+
+          <div className="flex items-center gap-5 text-[10px] uppercase tracking-widest2 text-mist">
+            <a
+              href="https://www.facebook.com/BrianKNolandRealEstate"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-gold"
+            >
+              Facebook
+            </a>
+            <span className="text-mist/40">&middot;</span>
+            <a
+              href="https://www.instagram.com/bknoland/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-gold"
+            >
+              Instagram
+            </a>
+            <span className="text-mist/40">&middot;</span>
+            <a
+              href="https://www.zillow.com/profile/brianknoland"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-gold"
+            >
+              Zillow
+            </a>
+          </div>
         </div>
 
         <div className="mt-12 border-t border-bone/10 pt-8">
